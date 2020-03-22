@@ -1,24 +1,34 @@
 <?xml version="1.0"?>
 <sdf version="1.4">
-<model name="RTIS_track">
-<link name="fullLink">
-<collision name="collision">
-<pose>0 0 0 0 0 0</pose>
-<geometry>
-<mesh>
-<uri>model://meshes/RTIS_track/RTIS_track.dae</uri>
-</mesh>
-</geometry>
-</collision>
-<visual name="visual">
-<pose>0 0 0 0 0 0</pose>
-<geometry>
-<mesh>
-<uri>model://meshes/RTIS_track/RTIS_track.dae</uri>
-</mesh>
-</geometry>
-</visual>
-</link>
-<static>1</static>
-</model>
+  <model name="RTIS_track">
+    <link name="field">
+      <collision name="collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://meshes/RTIS_track/RTIS_track_field.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://meshes/RTIS_track/RTIS_track_field.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="road">
+      <visual name="visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://meshes/RTIS_track/RTIS_track_road.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <static>1</static>
+  </model>
 </sdf>
