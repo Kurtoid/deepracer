@@ -121,6 +121,10 @@ class DeepRacerRacetrackEnv(gym.Env):
             for topic in STEERING_TOPICS:
                 self.steering_pub_dict[topic] = rospy.Publisher(topic, Float64, queue_size=1)
 
+            # send model outputs and reward to topic
+            self.last_reward = rospy.Publisher("/deepracer/last_reward", Float64, queue_size=1)
+            self.last_action= rospy.Publisher("/deepracer/last_action", Float64, queue_size=1)
+            self.pub_current_progress = rospy.Publisher("/deepracer/current_progress", Float64, queue_size=1)
             # Read in parameters
             self.world_name = rospy.get_param('WORLD_NAME')
             self.job_type = rospy.get_param('JOB_TYPE')
@@ -251,7 +255,7 @@ class DeepRacerRacetrackEnv(gym.Env):
     def set_allow_servo_step_signals(self, allow_servo_step_signals):
         self.allow_servo_step_signals = allow_servo_step_signals
 
-    def step(self, action):
+    def step(self, action)
         if node_type == SAGEMAKER_TRAINING_WORKER:
             return self.observation_space.sample(), 0, False, {}
 
@@ -259,6 +263,7 @@ class DeepRacerRacetrackEnv(gym.Env):
         self.next_state = None
         self.reward = None
         self.done = False
+        self.last_action.publish(action)
 
         # Send this action to Gazebo and increment the step count
         self.steering_angle = float(action[0])
@@ -417,13 +422,17 @@ class DeepRacerRacetrackEnv(gym.Env):
         self.reward_in_episode += reward
         self.done = done
 
+        # publish reward
+        self.pub_current_progress.publish(current_progress)
+        self.last_reward.publish(reward)
         # Trace logs to help us debug and visualize the training runs
         # btown TODO: This should be written to S3, not to CWL.
         logger.info('SIM_TRACE_LOG:%d,%d,%.4f,%.4f,%.4f,%.2f,%.2f,%d,%.4f,%s,%s,%.4f,%d,%.2f,%s\n' % (
             self.episodes, self.steps, model_location[0], model_location[1], model_heading,
             self.steering_angle,
             self.speed,
-            self.action_taken,
+            self.ackEnv
+            ction_taken,
             self.reward,
             self.done,
             all_wheels_on_track,
