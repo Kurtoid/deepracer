@@ -255,7 +255,7 @@ class DeepRacerRacetrackEnv(gym.Env):
     def set_allow_servo_step_signals(self, allow_servo_step_signals):
         self.allow_servo_step_signals = allow_servo_step_signals
 
-    def step(self, action)
+    def step(self, action):
         if node_type == SAGEMAKER_TRAINING_WORKER:
             return self.observation_space.sample(), 0, False, {}
 
