@@ -1,9 +1,7 @@
 import math
 def reward_function(params):
-    '''
-    Example of penalize steering, which helps mitigate zig-zag behaviors
-    '''
-    
+    # incentivize speed, while remaining on track
+
     # Read input parameters
     distance_from_center = params['distance_from_center']
     track_width = params['track_width']
