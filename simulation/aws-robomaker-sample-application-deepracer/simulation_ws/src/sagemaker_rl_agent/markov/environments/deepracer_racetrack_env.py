@@ -431,8 +431,7 @@ class DeepRacerRacetrackEnv(gym.Env):
             self.episodes, self.steps, model_location[0], model_location[1], model_heading,
             self.steering_angle,
             self.speed,
-            self.ackEnv
-            ction_taken,
+            self.action_taken,
             self.reward,
             self.done,
             all_wheels_on_track,
